@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 function DriverZones({ zones }) {
 	const classes = useStyles()
 	const [selectedZones, setSelectedZones] = useState([])
+	const [selectAll, setSelectAll] = useState([])
 
 	const handleChange = (id) => {
 		selectedZones.includes(id)
@@ -35,7 +36,18 @@ function DriverZones({ zones }) {
 			: setSelectedZones([...selectedZones, id])
 	}
 
-	console.log('selectedZones', selectedZones)
+	const handleChangeAll = (key, values) => {
+		if (selectAll.includes(key)) {
+			setSelectAll((prev) => prev.filter((zone) => zone !== key))
+			setSelectedZones([])
+		} else {
+			setSelectAll([...selectAll, key])
+			const selectedZones = values.map((value) => {
+				return value.id
+			})
+			setSelectedZones(selectedZones)
+		}
+	}
 
 	return (
 		<div>
@@ -44,7 +56,20 @@ function DriverZones({ zones }) {
 				<FormGroup>
 					{Object.entries(zones).map(([key, values]) => (
 						<div key={key} className={classes.zonesWrapper}>
-							<h4>{key}</h4>
+							<div>
+								<h4>{key}</h4>
+								<FormControlLabel
+									control={
+										<Checkbox
+											checked={selectAll.includes(key)}
+											onChange={() => handleChangeAll(key, values)}
+											name='selectBeirut'
+										/>
+									}
+									label='Select All'
+								/>
+							</div>
+
 							<div className={classes.zonesContainer}>
 								{values.map((value) => (
 									<FormControlLabel
