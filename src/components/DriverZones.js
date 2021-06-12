@@ -39,15 +39,19 @@ function DriverZones({ zones }) {
 	const handleChangeAll = (key, values) => {
 		if (selectAll.includes(key)) {
 			setSelectAll((prev) => prev.filter((zone) => zone !== key))
-			setSelectedZones([])
+			values.map((value) =>
+				setSelectedZones((prev) => prev.filter((zone) => zone !== value.id))
+			)
 		} else {
 			setSelectAll([...selectAll, key])
-			const selectedZones = values.map((value) => {
-				return value.id
-			})
-			setSelectedZones(selectedZones)
+			values.map((value) =>
+				setSelectedZones((prev) =>
+					selectedZones.includes(value.id) ? prev : [...prev, value.id]
+				)
+			)
 		}
 	}
+	console.log('selectedZones', selectedZones)
 
 	return (
 		<div>
