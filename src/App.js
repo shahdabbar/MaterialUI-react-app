@@ -37,7 +37,7 @@ function App() {
 		<MuiPickersUtilsProvider utils={DateFnsUtils}>
 			<div className='App'>
 				<header className='App-header'>
-					{/* <UserFields /> */}
+					<UserFields />
 					<DriverZones zones={zones} />
 				</header>
 			</div>

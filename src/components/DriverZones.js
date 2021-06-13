@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	zonesContainer: {
 		marginLeft: 20,
-		border: '1px solid white',
+		border: '1px solid black',
 		padding: 10,
 	},
 }))
