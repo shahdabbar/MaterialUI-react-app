@@ -3,7 +3,6 @@ import './App.css'
 import UserFields from './components/UserFields'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
-import { useState } from 'react'
 import DriverZones from './components/DriverZones'
 
 function App() {
