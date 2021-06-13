@@ -13,6 +13,7 @@ import * as Yup from 'yup'
 import Grid from '@material-ui/core/Grid'
 import { KeyboardDatePicker } from '@material-ui/pickers'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import 'date-fns'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -28,15 +29,12 @@ const useStyles = makeStyles((theme) => ({
 		minWidth: 120,
 		maxWidth: 300,
 	},
-	chips: {
-		display: 'flex',
-		flexWrap: 'wrap',
+	datePicker: {
+		width: '100%',
 	},
-	chip: {
-		margin: 2,
-	},
-	noLabel: {
-		marginTop: theme.spacing(3),
+	button: {
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 }))
 
@@ -72,6 +70,7 @@ const Gender = ({ handleChange, errors, touched }) => {
 }
 
 const DatePicker = () => {
+	const classes = useStyles()
 	const [selectedDate, setSelectedDate] = useState(new Date())
 
 	const handleDateChange = (date) => {
@@ -81,6 +80,7 @@ const DatePicker = () => {
 	return (
 		<Grid container>
 			<KeyboardDatePicker
+				className={classes.datePicker}
 				margin='normal'
 				id='date-picker-dialog'
 				label='Date of birth'
@@ -191,7 +191,12 @@ function UserFields() {
 				disabled
 			/>
 
-			<Button variant='contained' color='primary' type='submit'>
+			<Button
+				variant='contained'
+				color='primary'
+				type='submit'
+				className={classes.button}
+			>
 				Submit
 			</Button>
 		</form>

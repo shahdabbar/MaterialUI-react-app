@@ -17,11 +17,16 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'left',
 		alignItems: 'center',
+		padding: '10px',
 	},
 	zonesContainer: {
-		marginLeft: 20,
 		border: '1px solid black',
-		padding: 10,
+		borderRadius: 5,
+		padding: 15,
+	},
+	formGroup: {
+		display: 'flex',
+		flexDirection: 'row',
 	},
 }))
 
@@ -51,7 +56,6 @@ function DriverZones({ zones }) {
 			)
 		}
 	}
-	console.log('selectedZones', selectedZones)
 
 	return (
 		<div>
@@ -60,35 +64,41 @@ function DriverZones({ zones }) {
 				<FormGroup>
 					{Object.entries(zones).map(([key, values]) => (
 						<div key={key} className={classes.zonesWrapper}>
-							<div>
-								<h4>{key}</h4>
-								<FormControlLabel
-									control={
-										<Checkbox
-											checked={selectAll.includes(key)}
-											onChange={() => handleChangeAll(key, values)}
-											name='selectBeirut'
-										/>
-									}
-									label='Select All'
-								/>
-							</div>
-
-							<div className={classes.zonesContainer}>
-								{values.map((value) => (
-									<FormControlLabel
-										key={value.id}
-										control={
-											<Checkbox
-												checked={selectedZones.includes(value.id)}
-												onChange={() => handleChange(value.id)}
-												name={value.name}
-											/>
-										}
-										label={value.name}
+							<FormControlLabel
+								control={
+									<Checkbox
+										checked={selectAll.includes(key)}
+										onChange={() => handleChangeAll(key, values)}
+										name='selectAll'
 									/>
-								))}
-							</div>
+								}
+								labelPlacement='top'
+								label={key}
+							/>
+
+							<FormControl
+								component='fieldset'
+								className={classes.zonesContainer}
+							>
+								<FormLabel component='legend'>{key}</FormLabel>
+								<FormGroup className={classes.formGroup}>
+									{values.map((value) => (
+										<FormControlLabel
+											key={value.id}
+											control={
+												<Checkbox
+													checked={selectedZones.includes(
+														value.id
+													)}
+													onChange={() => handleChange(value.id)}
+													name={value.name}
+												/>
+											}
+											label={value.name}
+										/>
+									))}
+								</FormGroup>
+							</FormControl>
 						</div>
 					))}
 				</FormGroup>
